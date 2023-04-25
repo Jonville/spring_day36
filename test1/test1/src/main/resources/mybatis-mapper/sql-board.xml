@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.test1.mapper.BoardMapper">	
+	<!-- <select id="selectBoardList" resultType="com.example.test1.model.Board">	
+		<![CDATA[
+			SELECT 
+				BOARD_NO
+				, TITLE
+				, CONTENT
+				, ID
+				, TO_CHAR(CDATETIME, 'YYYY-MM-DD HH24:MI:SS') AS CDATETIME
+				, TO_CHAR(UDATETIME, 'YYYY-MM-DD HH24:MI:SS') AS UDATETIME
+				, CNT
+				, KIND
+			FROM
+				T_BOARD	
+			ORDER BY BOARD_NO DESC
+		]]>
+	</select>
+	<delete id="deleteBoard" parameterType="hashmap">	
+		DELETE FROM 
+			t_board 
+		WHERE 
+			BOARD_NO IN ( 
+				<foreach collection="list" item="item" separator=" , ">#{item.boardNo}</foreach> 
+			) 
+	</delete>
+	
+	<update id="updateBoard" parameterType="hashmap" >	
+		UPDATE T_BOARD SET CREATOR_ID = #{userId} WHERE BOARD_IDX = #{boardIdx}
+	</update>
+	
+	<insert id="insertBoard" parameterType="hashmap" >	
+		INSERT INTO t_board
+			(BOARD_NO, TITLE, CONTENT, CNT, CDATETIME, UDATETIME, ID)  
+		VALUES
+			(board_seq.NEXTVAL, #{title}, #{content}, '0', SYSDATE , SYSDATE,'test')
+	</insert>
+	
+	<select id="selectGetBoard" resultType="com.example.test1.model.Board">	
+		SELECT 
+			BOARD_NO
+			, TITLE
+			, CONTENT
+			, ID
+			, TO_CHAR(CDATETIME, 'YYYY-MM-DD HH24:MI:SS') AS CDATETIME
+			, TO_CHAR(UDATETIME, 'YYYY-MM-DD HH24:MI:SS') AS UDATETIME
+			, CNT
+			, KIND
+		FROM
+			T_BOARD
+		WHERE
+			BOARD_NO = #{boardNo}
+	</select>
+	
+	<update id="updateCnt" parameterType="hashmap" >	
+		UPDATE T_BOARD SET CNT = CNT + 1 
+		WHERE BOARD_NO = #{boardNo}
+	</update> -->
+</mapper>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.test1.mapper.StudentMapper">	
+	
+	<select id="selectStudentList" parameterType="hashmap" resultType="com.example.test1.model.Student">
+		SELECT 
+			STU_NO,
+			STU_NAME,
+			STU_DEPT,
+			STU_GRADE,
+			STU_HEIGHT,
+			STU_WEIGHT 
+		FROM STUDENT	
+		
+	</select>
+	
+	<select id="selectStudentInfo" parameterType="hashmap" resultType="com.example.test1.model.Student">
+	
+		SELECT 
+			AVG(ENR_GRADE) AS STUAVG,
+			S.STU_NO,
+			STU_NAME
+			
+		FROM STUDENT S
+		INNER JOIN ENROL E ON S.STU_NO = E.STU_NO
+		WHERE S.STU_NO = #{stuNo}
+		GROUP BY S.STU_NO, STU_NAME
+		
+	</select>
+	
+	<select id="selectSubjectList" parameterType="hashmap" resultType="com.example.test1.model.Subject">
+		SELECT 
+			SUB_NO,
+			SUB_NAME,
+			SUB_PROF,
+			SUB_GRADE,
+			SUB_DEPT 
+		FROM SUBJECT
+
+	</select>
+	
+	<delete id="deleteStudent" parameterType="hashmap">
+		DELETE FROM 
+			student
+		WHERE 
+			BOARD_NO IN ( 
+				<foreach collection="list" item="item" separator=" , ">#{item.stuNo}</foreach> 
+			) 
+	</delete>
+	
+</mapper>
